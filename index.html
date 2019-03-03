@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>pwg - a password generator</title>
+<link rel="stylesheet" type="text/css" href="slides/slides.css"></head>
+<body>
+<h1>pwg - a password generator</h1>
+<div class="slides">
+<div><div>
+<h1>pwg - a password generator</h1>
+</div>
+<ul><li>
+Generates random passwords
+</li><li>
+Number of upper case, lower case,
+  digits, and special chars can be
+  passed as arguments
+</li></ul>
+</div>
+<div><div>
+<code>
+<span class="macro">@Def(<span class="name">file: pwg.cpp</span>)</span><br/>
+<span class="in1"></span><span class="macro">@put(<span class="name">includes</span>)</span><br/>
+<span class="in1"></span><span class="macro">@put(<span class="name">globals</span>)</span><br/>
+<span class="in1"></span><span class="type">int</span> <span class="fn">main</span>(<span class="type">int</span> <span class="var">argc</span>, <span class="type">char</span> *<span class="var">argv</span>[]) {<br/>
+<span class="in2"></span><span class="macro">@put(<span class="name">main</span>)</span><br/>
+<span class="in1"></span>}<br/>
+<span class="macro">@end(<span class="name">file: pwg.cpp</span>)</span><br/>
+</code></div>
+</div>
+<div><div>
+<code>
+<span class="macro">@def(<span class="name">includes</span>)</span><br/>
+<span class="in1"></span>#<span class="var">include</span> &lt;<span class="var">string</span>&gt;<br/>
+<span class="macro">@end(<span class="name">includes</span>)</span><br/>
+</code></div>
+</div>
+<div><div>
+<code>
+<span class="macro">@def(<span class="name">main</span>)</span><br/>
+<span class="in1"></span>{ <span class="macro">@put(<span class="name">unit-tests</span>)</span>; }<br/>
+<span class="in1"></span><span class="macro">@put(<span class="name">default state</span>)</span>;<br/>
+<span class="in1"></span><span class="macro">@put(<span class="name">process args</span>)</span>;<br/>
+<span class="in1"></span><span class="var">std</span>::<span class="var">string</span> <span class="var">pw</span>;<br/>
+<span class="in1"></span><span class="macro">@put(<span class="name">generate pw</span>)</span>;<br/>
+<span class="in1"></span><span class="macro">@put(<span class="name">print pw</span>)</span>;<br/>
+<span class="macro">@end(<span class="name">main</span>)</span><br/>
+</code></div>
+</div>
+<div><div>
+<code>
+<span class="macro">@add(<span class="name">includes</span>)</span><br/>
+<span class="in1"></span>#<span class="var">include</span> &lt;<span class="var">iostream</span>&gt;<br/>
+<span class="macro">@end(<span class="name">includes</span>)</span><br/>
+</code></div>
+</div>
+<div><div>
+<code>
+<span class="macro">@def(<span class="name">print pw</span>)</span><br/>
+<span class="in1"></span><span class="var">std</span>::<span class="var">cout</span> &lt;&lt; <span class="var">pw</span> &lt;&lt; <span class="str">'\n'</span>;<br/>
+<span class="macro">@end(<span class="name">print pw</span>)</span><br/>
+</code></div>
+</div>
+<div><div>
+<code>
+<span class="macro">@def(<span class="name">globals</span>)</span><br/>
+<span class="in1"></span><span class="type">struct</span> <span class="type">Counts</span> {<br/>
+<span class="in2"></span><span class="type">int</span> <span class="var">upper</span> = <span class="num">3</span>;<br/>
+<span class="in2"></span><span class="macro">@put(<span class="name">other counts</span>)</span>;<br/>
+<span class="in1"></span>};<br/>
+<span class="macro">@end(<span class="name">globals</span>)</span><br/>
+</code></div>
+</div>
+<div><div>
+<code>
+<span class="macro">@def(<span class="name">default state</span>)</span><br/>
+<span class="in1"></span><span class="type">Counts</span> <span class="var">counts</span> {};<br/>
+<span class="macro">@end(<span class="name">default state</span>)</span><br/>
+</code></div>
+</div>
+<div><div>
+<code>
+<span class="macro">@add(<span class="name">default state</span>)</span><br/>
+<span class="in1"></span><span class="var">std</span>::<span class="var">string</span> <span class="var">upper</span> {<br/>
+<span class="in2"></span><span class="str">"ABCDEFGHIJKLMNOPQRSTUVWXYZ"</span><br/>
+<span class="in1"></span>};<br/>
+<span class="macro">@end(<span class="name">default state</span>)</span><br/>
+</code></div>
+</div>
+<div><div>
+<code>
+<span class="macro">@add(<span class="name">globals</span>)</span><br/>
+<span class="in1"></span><span class="var">template</span>&lt;<span class="var">typename</span> <span class="var">RE</span>&gt;<br/>
+<span class="in1"></span><span class="var">std</span>::<span class="var">string</span> <span class="fn">random_select</span>(<br/>
+<span class="in2"></span><span class="type">const</span> <span class="var">std</span>::<span class="var">string</span> &amp;<span class="var">source</span>,<br/>
+<span class="in2"></span><span class="type">int</span> <span class="var">count</span>,<br/>
+<span class="in2"></span><span class="var">RE</span> &amp;<span class="var">re</span><br/>
+<span class="in1"></span>) {<br/>
+<span class="in2"></span><span class="var">std</span>::<span class="var">string</span> <span class="var">result</span>;<br/>
+<span class="in2"></span><span class="macro">@put(<span class="name">random select</span>)</span>;<br/>
+<span class="in2"></span><span class="keyword">return</span> <span class="var">result</span>;<br/>
+<span class="in1"></span>}<br/>
+<span class="macro">@end(<span class="name">globals</span>)</span><br/>
+</code></div>
+</div>
+<div><div>
+<code>
+<span class="macro">@add(<span class="name">includes</span>)</span><br/>
+<span class="in1"></span>#<span class="var">include</span> &lt;<span class="var">cassert</span>&gt;<br/>
+<span class="in1"></span>#<span class="var">include</span> &lt;<span class="var">random</span>&gt;<br/>
+<span class="macro">@end(<span class="name">includes</span>)</span><br/>
+</code></div>
+</div>
+<div><div>
+<code>
+<span class="macro">@def(<span class="name">unit-tests</span>)</span><br/>
+<span class="in1"></span><span class="var">using</span> <span class="var">test_engine</span> =<br/>
+<span class="in2"></span><span class="var">std</span>::<span class="var">linear_congruential_engine</span>&lt;<br/>
+<span class="in3"></span><span class="type">unsigned</span>, <span class="num">1</span>, <span class="num">0</span>, <span class="num">0x7ff</span><br/>
+<span class="in2"></span>&gt;;<br/>
+<span class="macro">@end(<span class="name">unit-tests</span>)</span><br/>
+</code></div>
+</div>
+<div><div>
+<code>
+<span class="macro">@add(<span class="name">unit-tests</span>)</span> {<br/>
+<span class="in1"></span><span class="var">test_engine</span> <span class="fn">te</span>(<span class="num">0</span>);<br/>
+<span class="in1"></span><span class="fn">assert</span>(<br/>
+<span class="in2"></span><span class="fn">random_select</span>(<span class="str">"abc"</span>, <span class="num">4</span>, <span class="var">te</span>) ==<br/>
+<span class="in3"></span><span class="str">"aaaa"</span><br/>
+<span class="in1"></span>);<br/>
+} <span class="macro">@end(<span class="name">unit-tests</span>)</span><br/>
+</code></div>
+</div>
+<div><div>
+<code>
+<span class="macro">@add(<span class="name">default state</span>)</span><br/>
+<span class="in1"></span><span class="type">int</span> <span class="var">seed</span> = (<span class="var">std</span>::<span class="var">random_device</span> {})();<br/>
+<span class="macro">@end(<span class="name">default state</span>)</span><br/>
+</code></div>
+</div>
+<div><div>
+<code>
+<span class="macro">@def(<span class="name">generate pw</span>)</span><br/>
+<span class="in1"></span><span class="var">std</span>::<span class="var">mt19937</span> <span class="var">re</span> { <span class="var">seed</span> };<br/>
+<span class="in1"></span><span class="var">pw</span> += <span class="fn">random_select</span>(<br/>
+<span class="in2"></span><span class="var">upper</span>, <span class="var">counts</span>.<span class="var">upper</span>, <span class="var">re</span><br/>
+<span class="in1"></span>);<br/>
+<span class="macro">@end(<span class="name">generate pw</span>)</span><br/>
+</code></div>
+</div>
+<div><div>
+<code>
+<span class="macro">@def(<span class="name">random select</span>)</span><br/>
+<span class="in1"></span><span class="type">int</span> <span class="var">max</span> = <span class="var">source</span>.<span class="fn">size</span>() - <span class="num">1</span>;<br/>
+<span class="in1"></span><span class="var">std</span>::<span class="var">uniform_int_distribution</span>&lt;<span class="type">int</span>&gt;<br/>
+<span class="in2"></span><span class="var">d</span> { <span class="num">0</span>, <span class="var">max</span> };<br/>
+<span class="in1"></span><span class="keyword">for</span> (<span class="type">int</span> <span class="var">i</span> = <span class="num">0</span>; <span class="var">i</span> &lt; <span class="var">count</span>; ++<span class="var">i</span>) {<br/>
+<span class="in2"></span><span class="var">result</span> += <span class="var">source</span>[<span class="fn">d</span>(<span class="var">re</span>)];<br/>
+<span class="in1"></span>}<br/>
+<span class="macro">@end(<span class="name">random select</span>)</span><br/>
+</code></div>
+</div>
+<div><div>
+<code>
+<span class="macro">@def(<span class="name">other counts</span>)</span><br/>
+<span class="in1"></span><span class="type">int</span> <span class="var">lower</span> = <span class="num">3</span>;<br/>
+<span class="in1"></span><span class="type">int</span> <span class="var">digit</span> = <span class="num">2</span>;<br/>
+<span class="in1"></span><span class="type">int</span> <span class="var">special</span> = <span class="num">2</span>;<br/>
+<span class="macro">@end(<span class="name">other counts</span>)</span><br/>
+</code></div>
+</div>
+<div><div>
+<code>
+<span class="macro">@add(<span class="name">default state</span>)</span><br/>
+<span class="in1"></span><span class="var">std</span>::<span class="var">string</span> <span class="var">lower</span> {<br/>
+<span class="in2"></span><span class="str">"abcdefghijklmnopqrstuvwxyz"</span><br/>
+<span class="in1"></span>};<br/>
+<span class="in1"></span><span class="var">std</span>::<span class="var">string</span> <span class="var">digit</span> {<br/>
+<span class="in2"></span><span class="str">"0123456789"</span><br/>
+<span class="in1"></span>};<br/>
+<span class="in1"></span><span class="var">std</span>::<span class="var">string</span> <span class="var">special</span> {<br/>
+<span class="in2"></span><span class="str">".,:;!?+-*/[](){}"</span><br/>
+<span class="in1"></span>};<br/>
+<span class="macro">@end(<span class="name">default state</span>)</span><br/>
+</code></div>
+</div>
+<div><div>
+<code>
+<span class="macro">@add(<span class="name">generate pw</span>)</span><br/>
+<span class="in1"></span><span class="var">pw</span> += <span class="fn">random_select</span>(<br/>
+<span class="in2"></span><span class="var">lower</span>, <span class="var">counts</span>.<span class="var">upper</span>, <span class="var">re</span><br/>
+<span class="in1"></span>);<br/>
+<span class="in1"></span><span class="var">pw</span> += <span class="fn">random_select</span>(<br/>
+<span class="in2"></span><span class="var">digit</span>, <span class="var">counts</span>.<span class="var">digit</span>, <span class="var">re</span><br/>
+<span class="in1"></span>);<br/>
+<span class="in1"></span><span class="var">pw</span> += <span class="fn">random_select</span>(<br/>
+<span class="in2"></span><span class="var">special</span>, <span class="var">counts</span>.<span class="var">special</span>, <span class="var">re</span><br/>
+<span class="in1"></span>);<br/>
+<span class="macro">@end(<span class="name">generate pw</span>)</span><br/>
+</code></div>
+</div>
+<div><div>
+<code>
+<span class="macro">@add(<span class="name">globals</span>)</span><br/>
+<span class="in1"></span><span class="var">template</span>&lt;<span class="var">typename</span> <span class="var">RE</span>&gt;<br/>
+<span class="in1"></span><span class="var">std</span>::<span class="var">string</span> <span class="fn">random_permute</span>(<br/>
+<span class="in2"></span><span class="var">std</span>::<span class="var">string</span> <span class="var">str</span>,<br/>
+<span class="in2"></span><span class="var">RE</span> &amp;<span class="var">re</span><br/>
+<span class="in1"></span>) {<br/>
+<span class="in2"></span><span class="macro">@put(<span class="name">random permute</span>)</span>;<br/>
+<span class="in2"></span><span class="keyword">return</span> <span class="var">str</span>;<br/>
+<span class="in1"></span>}<br/>
+<span class="macro">@end(<span class="name">globals</span>)</span><br/>
+</code></div>
+</div>
+<div><div>
+<code>
+<span class="macro">@add(<span class="name">unit-tests</span>)</span> {<br/>
+<span class="in1"></span><span class="var">test_engine</span> <span class="fn">te</span>(<span class="num">0</span>);<br/>
+<span class="in1"></span><span class="fn">assert</span>(<br/>
+<span class="in2"></span><span class="fn">random_permute</span>(<span class="str">"abc"</span>, <span class="var">te</span>) == <span class="str">"bca"</span><br/>
+<span class="in1"></span>);<br/>
+} <span class="macro">@end(<span class="name">unit-tests</span>)</span><br/>
+</code></div>
+</div>
+<div><div>
+<code>
+<span class="macro">@add(<span class="name">generate pw</span>)</span><br/>
+<span class="in1"></span><span class="var">pw</span> = <span class="fn">random_permute</span>(<span class="var">pw</span>, <span class="var">re</span>);<br/>
+<span class="macro">@end(<span class="name">generate pw</span>)</span><br/>
+</code></div>
+</div>
+<div><div>
+<code>
+<span class="macro">@def(<span class="name">random permute</span>)</span><br/>
+<span class="in1"></span><span class="keyword">for</span> (<br/>
+<span class="in2"></span><span class="type">int</span> <span class="var">i</span> = <span class="var">str</span>.<span class="fn">size</span>() - <span class="num">1</span>; <span class="var">i</span> &gt; <span class="num">0</span>; --<span class="var">i</span><br/>
+<span class="in1"></span>) {<br/>
+<span class="in2"></span><span class="var">std</span>::<span class="var">uniform_int_distribution</span>&lt;<span class="type">int</span>&gt;<br/>
+<span class="in3"></span><span class="var">d</span> { <span class="num">0</span>, <span class="var">i</span> };<br/>
+<span class="in2"></span><span class="var">std</span>::<span class="fn">swap</span>(<span class="var">str</span>[<span class="var">i</span>], <span class="var">str</span>[<span class="fn">d</span>(<span class="var">re</span>)]);<br/>
+<span class="in1"></span>}<br/>
+<span class="macro">@end(<span class="name">random permute</span>)</span><br/>
+</code></div>
+</div>
+<div><div>
+<code>
+<span class="macro">@def(<span class="name">process args</span>)</span><br/>
+<span class="in1"></span><span class="keyword">if</span> (<span class="var">argc</span> &gt; <span class="num">1</span>) {<br/>
+<span class="in2"></span><span class="var">counts</span>.<span class="var">upper</span> = <span class="var">std</span>::<span class="fn">stoi</span>(<span class="var">argv</span>[<span class="num">1</span>]);<br/>
+<span class="in1"></span>}<br/>
+<span class="in1"></span><span class="keyword">if</span> (<span class="var">argc</span> &gt; <span class="num">2</span>) {<br/>
+<span class="in2"></span><span class="var">counts</span>.<span class="var">lower</span> = <span class="var">std</span>::<span class="fn">stoi</span>(<span class="var">argv</span>[<span class="num">2</span>]);<br/>
+<span class="in1"></span>}<br/>
+<span class="in1"></span><span class="keyword">if</span> (<span class="var">argc</span> &gt; <span class="num">3</span>) {<br/>
+<span class="in2"></span><span class="var">counts</span>.<span class="var">digit</span> = <span class="var">std</span>::<span class="fn">stoi</span>(<span class="var">argv</span>[<span class="num">3</span>]);<br/>
+<span class="in1"></span>}<br/>
+<span class="macro">@end(<span class="name">process args</span>)</span><br/>
+</code></div>
+</div>
+<div><div>
+<code>
+<span class="macro">@add(<span class="name">process args</span>)</span><br/>
+<span class="in1"></span><span class="keyword">if</span> (<span class="var">argc</span> &gt; <span class="num">4</span>) {<br/>
+<span class="in2"></span><span class="var">counts</span>.<span class="var">special</span> = <span class="var">std</span>::<span class="fn">stoi</span>(<span class="var">argv</span>[<span class="num">4</span>]);<br/>
+<span class="in1"></span>}<br/>
+<span class="in1"></span><span class="keyword">if</span> (<span class="var">argc</span> &gt; <span class="num">5</span>) {<br/>
+<span class="in2"></span><span class="var">special</span> = <span class="var">argv</span>[<span class="num">5</span>];<br/>
+<span class="in1"></span>}<br/>
+<span class="in1"></span><span class="keyword">if</span> (<span class="var">argc</span> &gt; <span class="num">6</span>) {<br/>
+<span class="in2"></span><span class="var">seed</span> = <span class="var">std</span>::<span class="fn">stoi</span>(<span class="var">argv</span>[<span class="num">6</span>]);<br/>
+<span class="in1"></span>}<br/>
+<span class="macro">@end(<span class="name">process args</span>)</span><br/>
+</code></div>
+</div>
+</body>
+</html>
