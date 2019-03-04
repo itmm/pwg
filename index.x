@@ -5,13 +5,13 @@
   passed as arguments
 
 ```
-@Def(file: pwg.cpp)
+@Def(| g++ -x c++ -o pwg -)
 	@put(includes)
 	@put(globals)
 	int main(int argc, char *argv[]) {
 		@put(main)
 	}
-@end(file: pwg.cpp)
+@end(| g++ -x c++ -o pwg -)
 ```
 
 ```
