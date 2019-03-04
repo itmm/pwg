@@ -5,43 +5,83 @@
   passed as arguments
 
 ```
-@Def(| g++ -x c++ -o pwg -)
+@Def(| c++ -x c++ -o pwg -)
+	@put(parts)
+@end(| c++ -x c++ -o pwg -)
+```
+* The generated code will be piped directly into the C++ compiler
+* The `-x c++` informs the compiler that the input is C++
+* The compiler will generate the object file `pwg`
+* The program consits of different parts
+* Invoking `hx` without arguments will build the executable and the
+  HTML documentation
+
+```
+@def(parts)
 	@put(includes)
+@end(parts)
+```
+* First the included files are specified
+* so the rest of the program can use hem
+
+```
+@add(parts)
 	@put(globals)
+@end(parts)
+```
+* Then global elements are defined
+* so the main function can use them
+
+```
+@add(parts)
 	int main(int argc, char *argv[]) {
 		@put(main)
 	}
-@end(| g++ -x c++ -o pwg -)
+@end(parts)
 ```
-
-```
-@def(includes)
-	#include <string>
-@end(includes)
-```
+* At last the main function is defined
+* This is the central entry point of the program
 
 ```
 @def(main)
 	{ @put(unit-tests); }
-	@put(default state);
-	@put(process args);
-	std::string pw;
-	@put(generate pw);
-	@put(print pw);
 @end(main)
 ```
+* Before runningt the main algorithm the `@f(main)` function runs all
+  unit-tests
+* It is scoped into a local block so all elements that are needed in a
+  unit-test are destroyed before the main algorithm starts
 
 ```
-@add(includes)
+@add(main)
+	@put(default state);
+	@put(process args);
+@end(main)
+```
+* The `@f(main)` function initializes the state object and processes
+  command line arguments
+* The global state will keep track of how many characters of each group
+  the algorithm generates
+
+```
+@def(includes)
+	#include <string>
 	#include <iostream>
 @end(includes)
 ```
+* The algorithm needs the `@s(<string>)` header for the `std::string`
+  class
+* and `@s(<iostream>)` to write them
 
 ```
-@def(print pw)
+@add(main)
+	std::string pw;
+	@put(generate pw);
 	std::cout << pw << '\n';
-@end(print pw)
+@end(main)
 ```
+* The algorithm stores the generated password in `pw`
+* After the generation it writes the password to standard output
 
 ```
 @def(globals)

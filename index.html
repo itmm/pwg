@@ -20,47 +20,117 @@ Number of upper case, lower case,
 </div>
 <div><div>
 <code>
-<span class="macro">@Def(<span class="name">| g++ -x c++ -o pwg -</span>)</span><br/>
-<span class="in1"></span><span class="macro">@put(<span class="name">includes</span>)</span><br/>
-<span class="in1"></span><span class="macro">@put(<span class="name">globals</span>)</span><br/>
-<span class="in1"></span><span class="type">int</span> <span class="fn">main</span>(<span class="type">int</span> <span class="var">argc</span>, <span class="type">char</span> *<span class="var">argv</span>[]) {<br/>
-<span class="in2"></span><span class="macro">@put(<span class="name">main</span>)</span><br/>
-<span class="in1"></span>}<br/>
-<span class="macro">@end(<span class="name">| g++ -x c++ -o pwg -</span>)</span><br/>
+<span class="macro">@Def(<span class="name">| c++ -x c++ -o pwg -</span>)</span><br/>
+<span class="in1"></span><span class="macro">@put(<span class="name">parts</span>)</span><br/>
+<span class="macro">@end(<span class="name">| c++ -x c++ -o pwg -</span>)</span><br/>
 </code></div>
+<ul><li>
+The generated code will be piped directly into the C++ compiler
+</li><li>
+The <code>-<span class="var">x</span> <span class="var">c</span>++</code> informs the compiler that the input is C++
+</li><li>
+The compiler will generate the object file <code><span class="var">pwg</span></code>
+</li><li>
+The program consits of different parts
+</li><li>
+Invoking <code><span class="var">hx</span></code> without arguments will build the executable and the
+  HTML documentation
+</li></ul>
 </div>
 <div><div>
 <code>
-<span class="macro">@def(<span class="name">includes</span>)</span><br/>
-<span class="in1"></span>#<span class="var">include</span> &lt;<span class="var">string</span>&gt;<br/>
-<span class="macro">@end(<span class="name">includes</span>)</span><br/>
+<span class="macro">@def(<span class="name">parts</span>)</span><br/>
+<span class="in1"></span><span class="macro">@put(<span class="name">includes</span>)</span><br/>
+<span class="macro">@end(<span class="name">parts</span>)</span><br/>
 </code></div>
+<ul><li>
+First the included files are specified
+</li><li>
+so the rest of the program can use hem
+</li></ul>
+</div>
+<div><div>
+<code>
+<span class="macro">@add(<span class="name">parts</span>)</span><br/>
+<span class="in1"></span><span class="macro">@put(<span class="name">globals</span>)</span><br/>
+<span class="macro">@end(<span class="name">parts</span>)</span><br/>
+</code></div>
+<ul><li>
+Then global elements are defined
+</li><li>
+so the main function can use them
+</li></ul>
+</div>
+<div><div>
+<code>
+<span class="macro">@add(<span class="name">parts</span>)</span><br/>
+<span class="in1"></span><span class="type">int</span> <span class="fn">main</span>(<span class="type">int</span> <span class="var">argc</span>, <span class="type">char</span> *<span class="var">argv</span>[]) {<br/>
+<span class="in2"></span><span class="macro">@put(<span class="name">main</span>)</span><br/>
+<span class="in1"></span>}<br/>
+<span class="macro">@end(<span class="name">parts</span>)</span><br/>
+</code></div>
+<ul><li>
+At last the main function is defined
+</li><li>
+This is the central entry point of the program
+</li></ul>
 </div>
 <div><div>
 <code>
 <span class="macro">@def(<span class="name">main</span>)</span><br/>
 <span class="in1"></span>{ <span class="macro">@put(<span class="name">unit-tests</span>)</span>; }<br/>
-<span class="in1"></span><span class="macro">@put(<span class="name">default state</span>)</span>;<br/>
-<span class="in1"></span><span class="macro">@put(<span class="name">process args</span>)</span>;<br/>
-<span class="in1"></span><span class="var">std</span>::<span class="var">string</span> <span class="var">pw</span>;<br/>
-<span class="in1"></span><span class="macro">@put(<span class="name">generate pw</span>)</span>;<br/>
-<span class="in1"></span><span class="macro">@put(<span class="name">print pw</span>)</span>;<br/>
 <span class="macro">@end(<span class="name">main</span>)</span><br/>
 </code></div>
+<ul><li>
+Before runningt the main algorithm the <code><span class="fn">main</span></code> function runs all
+  unit-tests
+</li><li>
+It is scoped into a local block so all elements that are needed in a
+  unit-test are destroyed before the main algorithm starts
+</li></ul>
 </div>
 <div><div>
 <code>
-<span class="macro">@add(<span class="name">includes</span>)</span><br/>
+<span class="macro">@add(<span class="name">main</span>)</span><br/>
+<span class="in1"></span><span class="macro">@put(<span class="name">default state</span>)</span>;<br/>
+<span class="in1"></span><span class="macro">@put(<span class="name">process args</span>)</span>;<br/>
+<span class="macro">@end(<span class="name">main</span>)</span><br/>
+</code></div>
+<ul><li>
+The <code><span class="fn">main</span></code> function initializes the state object and processes
+  command line arguments
+</li><li>
+The global state will keep track of how many characters of each group
+  the algorithm generates
+</li></ul>
+</div>
+<div><div>
+<code>
+<span class="macro">@def(<span class="name">includes</span>)</span><br/>
+<span class="in1"></span>#<span class="var">include</span> &lt;<span class="var">string</span>&gt;<br/>
 <span class="in1"></span>#<span class="var">include</span> &lt;<span class="var">iostream</span>&gt;<br/>
 <span class="macro">@end(<span class="name">includes</span>)</span><br/>
 </code></div>
+<ul><li>
+The algorithm needs the <code><span class="str">&lt;string&gt;</span></code> header for the <code><span class="var">std</span>::<span class="var">string</span></code>
+  class
+</li><li>
+and <code><span class="str">&lt;iostream&gt;</span></code> to write them
+</li></ul>
 </div>
 <div><div>
 <code>
-<span class="macro">@def(<span class="name">print pw</span>)</span><br/>
+<span class="macro">@add(<span class="name">main</span>)</span><br/>
+<span class="in1"></span><span class="var">std</span>::<span class="var">string</span> <span class="var">pw</span>;<br/>
+<span class="in1"></span><span class="macro">@put(<span class="name">generate pw</span>)</span>;<br/>
 <span class="in1"></span><span class="var">std</span>::<span class="var">cout</span> &lt;&lt; <span class="var">pw</span> &lt;&lt; <span class="str">'\n'</span>;<br/>
-<span class="macro">@end(<span class="name">print pw</span>)</span><br/>
+<span class="macro">@end(<span class="name">main</span>)</span><br/>
 </code></div>
+<ul><li>
+The algorithm stores the generated password in <code><span class="var">pw</span></code>
+</li><li>
+After the generation it writes the password to standard output
+</li></ul>
 </div>
 <div><div>
 <code>
