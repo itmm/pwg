@@ -1,4 +1,4 @@
-# pwg - a password generator
+# pwg – a password generator
 * Generates random passwords
 * Number of upper case, lower case,
   digits, and special chars can be
@@ -114,6 +114,8 @@
 @end(globals)
 ```
 * Define type for uniform distribution
+* This shortens the code parts that use random distributions
+* It must be declared before the functions are declared that use it
 
 ```
 @add(globals)
