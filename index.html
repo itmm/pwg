@@ -110,12 +110,12 @@ The state can be changed with command line arguments that the
 <div><div>
 <code>
 <span class="macro">@def(<span class="name">includes</span>)</span><br/>
-<span class="in1"></span>#<span class="var">include</span> &lt;<span class="var">string</span>&gt;<br/>
-<span class="in1"></span>#<span class="var">include</span> &lt;<span class="var">iostream</span>&gt;<br/>
+<span class="in1"></span><span class="keyword">#include</span> <span class="str">&lt;string&gt;</span><br/>
+<span class="in1"></span><span class="keyword">#include</span> <span class="str">&lt;iostream&gt;</span><br/>
 <span class="macro">@end(<span class="name">includes</span>)</span><br/>
 </code></div>
 <ul><li>
-The algorithm needs the <code><span class="str">&lt;string&gt;</span></code> header for the <code><span class="var">std</span>::<span class="var">string</span></code>
+The algorithm needs the <code><span class="str">&lt;string&gt;</span></code> header for the <code><span class="type">std</span>::<span class="type">string</span></code>
   class
 </li><li>
 and <code><span class="str">&lt;iostream&gt;</span></code> to write them
@@ -124,9 +124,9 @@ and <code><span class="str">&lt;iostream&gt;</span></code> to write them
 <div><div>
 <code>
 <span class="macro">@add(<span class="name">main</span>)</span><br/>
-<span class="in1"></span><span class="var">std</span>::<span class="var">string</span> <span class="var">pw</span>;<br/>
+<span class="in1"></span><span class="type">std</span>::<span class="type">string</span> <span class="var">pw</span>;<br/>
 <span class="in1"></span><span class="macro">@put(<span class="name">generate pw</span>)</span>;<br/>
-<span class="in1"></span><span class="var">std</span>::<span class="var">cout</span> &lt;&lt; <span class="var">pw</span> &lt;&lt; <span class="str">'\n'</span>;<br/>
+<span class="in1"></span><span class="type">std</span>::<span class="var">cout</span> &lt;&lt; <span class="var">pw</span> &lt;&lt; <span class="str">'\n'</span>;<br/>
 <span class="macro">@end(<span class="name">main</span>)</span><br/>
 </code></div>
 <ul><li>
@@ -139,7 +139,7 @@ After the generation it writes the password to standard output
 <code>
 <span class="macro">@def(<span class="name">state</span>)</span><br/>
 <span class="in1"></span><span class="type">int</span> <span class="var">upper_count</span> = <span class="num">3</span>;<br/>
-<span class="in1"></span><span class="var">std</span>::<span class="var">string</span> <span class="var">upper_set</span> {<br/>
+<span class="in1"></span><span class="type">std</span>::<span class="type">string</span> <span class="var">upper_set</span> {<br/>
 <span class="in2"></span><span class="str">"ABCDEFGHIJKLMNOPQRSTUVWXYZ"</span><br/>
 <span class="in1"></span>};<br/>
 <span class="macro">@end(<span class="name">state</span>)</span><br/>
@@ -150,13 +150,13 @@ After the generation it writes the password to standard output
 For each group there is one variable that holds the number of
   characters that are chosen from this group
 </li><li>
-and a <code><span class="var">std</span>::<span class="var">string</span></code> with all characters in this group
+and a <code><span class="type">std</span>::<span class="type">string</span></code> with all characters in this group
 </li></ul>
 </div>
 <div><div>
 <code>
 <span class="macro">@add(<span class="name">includes</span>)</span><br/>
-<span class="in1"></span>#<span class="var">include</span> &lt;<span class="var">random</span>&gt;<br/>
+<span class="in1"></span><span class="keyword">#include</span> <span class="str">&lt;random&gt;</span><br/>
 <span class="macro">@end(<span class="name">includes</span>)</span><br/>
 </code></div>
 <ul><li>
@@ -166,8 +166,8 @@ The <code><span class="str">&lt;random&gt;</span></code> header from C++ is used
 <div><div>
 <code>
 <span class="macro">@def(<span class="name">globals</span>)</span><br/>
-<span class="in1"></span><span class="var">using</span> <span class="type">Uniform</span> =<br/>
-<span class="in2"></span><span class="var">std</span>::<span class="var">uniform_int_distribution</span>&lt;<br/>
+<span class="in1"></span><span class="keyword">using</span> <span class="type">Uniform</span> =<br/>
+<span class="in2"></span><span class="type">std</span>::<span class="type">uniform_int_distribution</span>&lt;<br/>
 <span class="in3"></span><span class="type">int</span><br/>
 <span class="in2"></span>&gt;;<br/>
 <span class="macro">@end(<span class="name">globals</span>)</span><br/>
@@ -183,12 +183,12 @@ It must be declared before the functions are declared that use it
 <div><div>
 <code>
 <span class="macro">@add(<span class="name">globals</span>)</span><br/>
-<span class="in1"></span><span class="var">template</span>&lt;<span class="var">typename</span> <span class="var">RE</span>&gt;<br/>
-<span class="in1"></span><span class="var">std</span>::<span class="var">string</span> <span class="fn">random_select</span>(<br/>
-<span class="in2"></span><span class="type">const</span> <span class="var">std</span>::<span class="var">string</span> &amp;<span class="var">source</span>,<br/>
-<span class="in2"></span><span class="type">int</span> <span class="var">count</span>, <span class="var">RE</span> &amp;<span class="var">re</span><br/>
+<span class="in1"></span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> <span class="type">RE</span>&gt;<br/>
+<span class="in1"></span><span class="type">std</span>::<span class="type">string</span> <span class="fn">random_select</span>(<br/>
+<span class="in2"></span><span class="type">const</span> <span class="type">std</span>::<span class="type">string</span> &amp;<span class="var">source</span>,<br/>
+<span class="in2"></span><span class="type">int</span> <span class="var">count</span>, <span class="type">RE</span> &amp;<span class="var">re</span><br/>
 <span class="in1"></span>) {<br/>
-<span class="in2"></span><span class="var">std</span>::<span class="var">string</span> <span class="var">result</span>;<br/>
+<span class="in2"></span><span class="type">std</span>::<span class="type">string</span> <span class="var">result</span>;<br/>
 <span class="in2"></span><span class="macro">@put(<span class="name">random select</span>)</span>;<br/>
 <span class="in2"></span><span class="keyword">return</span> <span class="var">result</span>;<br/>
 <span class="in1"></span>}<br/>
@@ -207,8 +207,8 @@ It is a template function to allow any random engine to be passed
 <div><div>
 <code>
 <span class="macro">@def(<span class="name">unit-tests</span>)</span><br/>
-<span class="in1"></span><span class="var">using</span> <span class="var">test_engine</span> =<br/>
-<span class="in2"></span><span class="var">std</span>::<span class="var">linear_congruential_engine</span>&lt;<br/>
+<span class="in1"></span><span class="keyword">using</span> <span class="type">TestEngine</span> =<br/>
+<span class="in2"></span><span class="type">std</span>::<span class="type">linear_congruential_engine</span>&lt;<br/>
 <span class="in3"></span><span class="type">unsigned</span>, <span class="num">1</span>, <span class="num">0</span>, <span class="num">0x7ff</span><br/>
 <span class="in2"></span>&gt;;<br/>
 <span class="macro">@end(<span class="name">unit-tests</span>)</span><br/>
@@ -221,7 +221,7 @@ For unit-testing <code><span class="var">pwg</span></code> uses a simple random 
 <div><div>
 <code>
 <span class="macro">@add(<span class="name">includes</span>)</span><br/>
-<span class="in1"></span>#<span class="var">include</span> &lt;<span class="var">cassert</span>&gt;<br/>
+<span class="in1"></span><span class="keyword">#include</span> <span class="str">&lt;cassert&gt;</span><br/>
 <span class="macro">@end(<span class="name">includes</span>)</span><br/>
 </code></div>
 <ul><li>
@@ -232,7 +232,7 @@ The unit-tests use the <code><span class="fn">assert</span></code> macro from th
 <div><div>
 <code>
 <span class="macro">@add(<span class="name">unit-tests</span>)</span> {<br/>
-<span class="in1"></span><span class="var">test_engine</span> <span class="fn">te</span>(<span class="num">0</span>);<br/>
+<span class="in1"></span><span class="type">TestEngine</span> <span class="var">te</span> { <span class="num">0</span> };<br/>
 <span class="in1"></span><span class="fn">assert</span>(<br/>
 <span class="in2"></span><span class="fn">random_select</span>(<span class="str">"abc"</span>, <span class="num">4</span>, <span class="var">te</span>) ==<br/>
 <span class="in3"></span><span class="str">"aaaa"</span><br/>
@@ -265,7 +265,7 @@ It builds a uniform distribution so it choses each character with the
 <div><div>
 <code>
 <span class="macro">@add(<span class="name">state</span>)</span><br/>
-<span class="in1"></span><span class="type">int</span> <span class="var">seed</span> = (<span class="var">std</span>::<span class="var">random_device</span> {})();<br/>
+<span class="in1"></span><span class="type">int</span> <span class="var">seed</span> = (<span class="type">std</span>::<span class="type">random_device</span> {})();<br/>
 <span class="macro">@end(<span class="name">state</span>)</span><br/>
 </code></div>
 <ul><li>
@@ -274,14 +274,14 @@ For the real random engine <code><span class="var">pwg</span></code> generates a
 The user can overwrite this <code><span class="var">seed</span></code> with a command line argument to
   generate deterministic results
 </li><li>
-Also the invocation of <code><span class="var">std</span>::<span class="var">random_device</span></code> can be time consuming to
+Also the invocation of <code><span class="type">std</span>::<span class="type">random_device</span></code> can be time consuming to
   <code><span class="var">pwg</span></code> uses a Mersenne Twister algorithm instead
 </li></ul>
 </div>
 <div><div>
 <code>
 <span class="macro">@def(<span class="name">generate pw</span>)</span><br/>
-<span class="in1"></span><span class="var">std</span>::<span class="var">mt19937</span> <span class="var">re</span> { <span class="var">seed</span> };<br/>
+<span class="in1"></span><span class="type">std</span>::<span class="type">mt19937</span> <span class="var">re</span> { <span class="var">seed</span> };<br/>
 <span class="macro">@end(<span class="name">generate pw</span>)</span><br/>
 </code></div>
 <ul><li>
@@ -304,7 +304,7 @@ Also the invocation of <code><span class="var">std</span>::<span class="var">ran
 <code>
 <span class="macro">@add(<span class="name">state</span>)</span><br/>
 <span class="in1"></span><span class="type">int</span> <span class="var">lower_count</span> = <span class="num">3</span>;<br/>
-<span class="in1"></span><span class="var">std</span>::<span class="var">string</span> <span class="var">lower_set</span> {<br/>
+<span class="in1"></span><span class="type">std</span>::<span class="type">string</span> <span class="var">lower_set</span> {<br/>
 <span class="in2"></span><span class="str">"abcdefghijklmnopqrstuvwxyz"</span><br/>
 <span class="in1"></span>};<br/>
 <span class="macro">@end(<span class="name">state</span>)</span><br/>
@@ -345,9 +345,9 @@ But other characters may be added before the shuffeling
 <div><div>
 <code>
 <span class="macro">@add(<span class="name">globals</span>)</span><br/>
-<span class="in1"></span><span class="var">template</span>&lt;<span class="var">typename</span> <span class="var">RE</span>&gt;<br/>
-<span class="in1"></span><span class="var">std</span>::<span class="var">string</span> <span class="fn">random_permute</span>(<br/>
-<span class="in2"></span><span class="var">std</span>::<span class="var">string</span> <span class="var">str</span>, <span class="var">RE</span> &amp;<span class="var">re</span><br/>
+<span class="in1"></span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> <span class="type">RE</span>&gt;<br/>
+<span class="in1"></span><span class="type">std</span>::<span class="type">string</span> <span class="fn">random_permute</span>(<br/>
+<span class="in2"></span><span class="type">std</span>::<span class="type">string</span> <span class="var">str</span>, <span class="type">RE</span> &amp;<span class="var">re</span><br/>
 <span class="in1"></span>) {<br/>
 <span class="in2"></span><span class="macro">@put(<span class="name">random permute</span>)</span>;<br/>
 <span class="in2"></span><span class="keyword">return</span> <span class="var">str</span>;<br/>
@@ -380,7 +380,7 @@ The <code><span class="fn">main</span></code> function uses <code><span class="f
 <span class="in1"></span><span class="type">int</span> <span class="var">i</span> = <span class="var">str</span>.<span class="fn">size</span>() - <span class="num">1</span>;<br/>
 <span class="in1"></span><span class="keyword">for</span> (; <span class="var">i</span> &gt; <span class="num">0</span>; --<span class="var">i</span>) {<br/>
 <span class="in2"></span><span class="type">Uniform</span> <span class="var">d</span> { <span class="num">0</span>, <span class="var">i</span> };<br/>
-<span class="in2"></span><span class="var">std</span>::<span class="fn">swap</span>(<span class="var">str</span>[<span class="var">i</span>], <span class="var">str</span>[<span class="fn">d</span>(<span class="var">re</span>)]);<br/>
+<span class="in2"></span><span class="type">std</span>::<span class="fn">swap</span>(<span class="var">str</span>[<span class="var">i</span>], <span class="var">str</span>[<span class="fn">d</span>(<span class="var">re</span>)]);<br/>
 <span class="in1"></span>}<br/>
 <span class="macro">@end(<span class="name">random permute</span>)</span><br/>
 </code></div>
@@ -395,7 +395,7 @@ Then it exchanges the second to last character with a character at a
 <div><div>
 <code>
 <span class="macro">@add(<span class="name">unit-tests</span>)</span> {<br/>
-<span class="in1"></span><span class="var">test_engine</span> <span class="fn">te</span>(<span class="num">0</span>);<br/>
+<span class="in1"></span><span class="type">TestEngine</span> <span class="var">te</span> { <span class="num">0</span> };<br/>
 <span class="in1"></span><span class="fn">assert</span>(<br/>
 <span class="in2"></span><span class="fn">random_permute</span>(<span class="str">"abc"</span>, <span class="var">te</span>) == <span class="str">"bca"</span><br/>
 <span class="in1"></span>);<br/>
@@ -413,7 +413,7 @@ Then <code><span class="str">cba</span></code> becomes <code><span class="str">b
 <code>
 <span class="macro">@add(<span class="name">state</span>)</span><br/>
 <span class="in1"></span><span class="type">int</span> <span class="var">digit_count</span> = <span class="num">2</span>;<br/>
-<span class="in1"></span><span class="var">std</span>::<span class="var">string</span> <span class="var">digit_set</span> {<br/>
+<span class="in1"></span><span class="type">std</span>::<span class="type">string</span> <span class="var">digit_set</span> {<br/>
 <span class="in2"></span><span class="str">"0123456789"</span><br/>
 <span class="in1"></span>};<br/>
 <span class="macro">@end(<span class="name">state</span>)</span><br/>
@@ -439,7 +439,7 @@ Digits are also supported as part of a password
 <code>
 <span class="macro">@add(<span class="name">state</span>)</span><br/>
 <span class="in1"></span><span class="type">int</span> <span class="var">special_count</span> = <span class="num">2</span>;<br/>
-<span class="in1"></span><span class="var">std</span>::<span class="var">string</span> <span class="var">special_set</span> {<br/>
+<span class="in1"></span><span class="type">std</span>::<span class="type">string</span> <span class="var">special_set</span> {<br/>
 <span class="in2"></span><span class="str">".,:;!?+-*/[](){}"</span><br/>
 <span class="in1"></span>};<br/>
 <span class="macro">@end(<span class="name">state</span>)</span><br/>
@@ -465,7 +465,7 @@ Special Characters are also supported as part of a password
 <code>
 <span class="macro">@def(<span class="name">process args</span>)</span><br/>
 <span class="in1"></span><span class="keyword">if</span> (<span class="var">argc</span> &gt; <span class="num">1</span>) {<br/>
-<span class="in2"></span><span class="var">upper_count</span> = <span class="var">std</span>::<span class="fn">stoi</span>(<span class="var">argv</span>[<span class="num">1</span>]);<br/>
+<span class="in2"></span><span class="var">upper_count</span> = <span class="type">std</span>::<span class="fn">stoi</span>(<span class="var">argv</span>[<span class="num">1</span>]);<br/>
 <span class="in1"></span>}<br/>
 <span class="macro">@end(<span class="name">process args</span>)</span><br/>
 </code></div>
@@ -478,7 +478,7 @@ The first command line argument is the number of upper-case letters
 <code>
 <span class="macro">@add(<span class="name">process args</span>)</span><br/>
 <span class="in1"></span><span class="keyword">if</span> (<span class="var">argc</span> &gt; <span class="num">2</span>) {<br/>
-<span class="in2"></span><span class="var">lower_count</span> = <span class="var">std</span>::<span class="fn">stoi</span>(<span class="var">argv</span>[<span class="num">2</span>]);<br/>
+<span class="in2"></span><span class="var">lower_count</span> = <span class="type">std</span>::<span class="fn">stoi</span>(<span class="var">argv</span>[<span class="num">2</span>]);<br/>
 <span class="in1"></span>}<br/>
 <span class="macro">@end(<span class="name">process args</span>)</span><br/>
 </code></div>
@@ -491,7 +491,7 @@ The second command line argument is the number of lower-case letters
 <code>
 <span class="macro">@add(<span class="name">process args</span>)</span><br/>
 <span class="in1"></span><span class="keyword">if</span> (<span class="var">argc</span> &gt; <span class="num">3</span>) {<br/>
-<span class="in2"></span><span class="var">digit_count</span> = <span class="var">std</span>::<span class="fn">stoi</span>(<span class="var">argv</span>[<span class="num">3</span>]);<br/>
+<span class="in2"></span><span class="var">digit_count</span> = <span class="type">std</span>::<span class="fn">stoi</span>(<span class="var">argv</span>[<span class="num">3</span>]);<br/>
 <span class="in1"></span>}<br/>
 <span class="macro">@end(<span class="name">process args</span>)</span><br/>
 </code></div>
@@ -505,7 +505,7 @@ The third command line argument is the number of digits in the
 <span class="macro">@add(<span class="name">process args</span>)</span><br/>
 <span class="in1"></span><span class="keyword">if</span> (<span class="var">argc</span> &gt; <span class="num">4</span>) {<br/>
 <span class="in2"></span><span class="var">special_count</span> =<br/>
-<span class="in3"></span><span class="var">std</span>::<span class="fn">stoi</span>(<span class="var">argv</span>[<span class="num">4</span>]);<br/>
+<span class="in3"></span><span class="type">std</span>::<span class="fn">stoi</span>(<span class="var">argv</span>[<span class="num">4</span>]);<br/>
 <span class="in1"></span>}<br/>
 <span class="macro">@end(<span class="name">process args</span>)</span><br/>
 </code></div>
@@ -531,7 +531,7 @@ The fifth command line argument is the set of special characters used
 <code>
 <span class="macro">@add(<span class="name">process args</span>)</span><br/>
 <span class="in1"></span><span class="keyword">if</span> (<span class="var">argc</span> &gt; <span class="num">6</span>) {<br/>
-<span class="in2"></span><span class="var">seed</span> = <span class="var">std</span>::<span class="fn">stoi</span>(<span class="var">argv</span>[<span class="num">6</span>]);<br/>
+<span class="in2"></span><span class="var">seed</span> = <span class="type">std</span>::<span class="fn">stoi</span>(<span class="var">argv</span>[<span class="num">6</span>]);<br/>
 <span class="in1"></span>}<br/>
 <span class="macro">@end(<span class="name">process args</span>)</span><br/>
 </code></div>

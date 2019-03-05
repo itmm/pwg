@@ -67,8 +67,8 @@
 
 ```
 @def(includes)
-	#include <string>
-	#include <iostream>
+	#include @s(<string>)
+	#include @s(<iostream>)
 @end(includes)
 ```
 * The algorithm needs the `@s(<string>)` header for the `std::string`
@@ -100,7 +100,7 @@
 
 ```
 @add(includes)
-	#include <random>
+	#include @s(<random>)
 @end(includes)
 ```
 * The `@s(<random>)` header from C++ is used to generate random numbers
@@ -108,7 +108,7 @@
 ```
 @def(globals)
 	using Uniform =
-		std::uniform_int_distribution<
+		std::@t(uniform_int_distribution)<
 			int
 		>;
 @end(globals)
@@ -119,10 +119,10 @@
 
 ```
 @add(globals)
-	template<typename RE>
+	template<typename @t(RE)>
 	std::string random_select(
 		const std::string &source,
-		int count, RE &re
+		int count, @t(RE) &re
 	) {
 		std::string result;
 		@put(random select);
@@ -138,8 +138,8 @@
 
 ```
 @def(unit-tests)
-	using test_engine =
-		std::linear_congruential_engine<
+	using TestEngine =
+		std::@t(linear_congruential_engine)<
 			unsigned, 1, 0, 0x7ff
 		>;
 @end(unit-tests)
@@ -149,7 +149,7 @@
 
 ```
 @add(includes)
-	#include <cassert>
+	#include @s(<cassert>)
 @end(includes)
 ```
 * The unit-tests use the `@f(assert)` macro from the `@s(<cassert>)`
@@ -157,7 +157,7 @@
 
 ```
 @add(unit-tests) {
-	test_engine te(0);
+	TestEngine te { 0 };
 	assert(
 		random_select("abc", 4, te) ==
 			"aaaa"
@@ -183,18 +183,18 @@
 
 ```
 @add(state)
-	int seed = (std::random_device {})();
+	int seed = (std::@t(random_device) {})();
 @end(state)
 ```
 * For the real random engine `pwg` generates a random seed
 * The user can overwrite this `seed` with a command line argument to
   generate deterministic results
-* Also the invocation of `std::random_device` can be time consuming to
+* Also the invocation of `std::@t(random_device)` can be time consuming to
   `pwg` uses a Mersenne Twister algorithm instead
 
 ```
 @def(generate pw)
-	std::mt19937 re { seed };
+	std::@t(mt19937) re { seed };
 @end(generate pw)
 ```
 * `pwg` initialises the Mersenne Twister with the seed value
@@ -241,9 +241,9 @@
 
 ```
 @add(globals)
-	template<typename RE>
+	template<typename @t(RE)>
 	std::string random_permute(
-		std::string str, RE &re
+		std::string str, @t(RE) &re
 	) {
 		@put(random permute);
 		return str;
@@ -279,7 +279,7 @@
 
 ```
 @add(unit-tests) {
-	test_engine te(0);
+	TestEngine te { 0 };
 	assert(
 		random_permute("abc", te) == "bca"
 	);
