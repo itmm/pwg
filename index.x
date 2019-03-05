@@ -258,6 +258,8 @@
 	pw = random_permute(pw, re);
 @end(shuffle pw)
 ```
+* The `@f(main)` function uses `@f(random_permute)` to perturbate the
+  letters from the different categories
 
 ```
 @def(random permute)
@@ -303,7 +305,7 @@
 @end(add other chars)
 ```
 * `pwg` chooses random digits and adds them to the password before
-  performing the permute
+  performing the permutation
 
 ```
 @add(state)
@@ -313,6 +315,7 @@
 	};
 @end(state)
 ```
+* Special Characters are also supported as part of a password
 
 ```
 @add(add other chars)
@@ -321,20 +324,38 @@
 	);
 @end(add other chars)
 ```
+* `pwg` chooses random special characters and adds them to the password
+  before performing the permutation
 
 ```
 @def(process args)
 	if (argc > 1) {
 		upper_count = std::stoi(argv[1]);
 	}
+@end(process args)
+```
+* The first command line argument is the number of upper-case letters
+  in the generated password
+
+```
+@add(process args)
 	if (argc > 2) {
 		lower_count = std::stoi(argv[2]);
 	}
+@end(process args)
+```
+* The second command line argument is the number of lower-case letters
+  in the generated password
+
+```
+@add(process args)
 	if (argc > 3) {
 		digit_count = std::stoi(argv[3]);
 	}
 @end(process args)
 ```
+* The third command line argument is the number of digits in the
+  generated password
 
 ```
 @add(process args)
@@ -342,12 +363,29 @@
 		special_count =
 			std::stoi(argv[4]);
 	}
+@end(process args)
+```
+* The fourth command line argument is the number of special characters
+  in the generated password
+
+```
+@add(process args)
 	if (argc > 5) {
 		special_set = argv[5];
 	}
+@end(process args)
+```
+* The fifth command line argument is the set of special characters used
+  in the generated password
+
+```
+@add(process args)
 	if (argc > 6) {
 		seed = std::stoi(argv[6]);
 	}
 @end(process args)
 ```
+* The sixth command line argument is an integer that is used as a seed
+  for the random number generator
+* By using a seed `pwg` will show deterministic behaviour
 
