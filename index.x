@@ -276,6 +276,7 @@
   a character at a random position in the string
 * Then it exchanges the second to last character with a character at a
   random position up to and including this string
+* This continues until there is only one character left
 
 ```
 @add(unit-tests) {
@@ -317,7 +318,7 @@
 	};
 @end(state)
 ```
-* Special Characters are also supported as part of a password
+* Special characters are also supported as part of a password
 
 ```
 @add(add other chars)
