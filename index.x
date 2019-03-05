@@ -54,14 +54,16 @@
 
 ```
 @add(main)
-	@put(default state);
+	@put(state);
 	@put(process args);
 @end(main)
 ```
 * The `@f(main)` function initializes the state object and processes
   command line arguments
-* The global state will keep track of how many characters of each group
+* The state will keep track of how many characters of each group that
   the algorithm generates
+* The state can be changed with command line arguments that the
+  `@f(main)` function processes next
 
 ```
 @def(includes)
@@ -84,35 +86,41 @@
 * After the generation it writes the password to standard output
 
 ```
-@def(globals)
-	struct Counts {
-		int upper = 3;
-		@put(other counts);
-	};
-@end(globals)
-```
-
-```
-@def(default state)
-	Counts counts {};
-@end(default state)
-```
-
-```
-@add(default state)
-	std::string upper {
+@def(state)
+	int upper_count = 3;
+	std::string upper_set {
 		"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 	};
-@end(default state)
+@end(state)
 ```
+* `pwg` generates a password from different character groups
+* For each group there is one variable that holds the number of
+  characters that are chosen from this group
+* and a `std::string` with all characters in this group
+
+```
+@add(includes)
+	#include <random>
+@end(includes)
+```
+* The `@s(<random>)` header from C++ is used to generate random numbers
+
+```
+@def(globals)
+	using Uniform =
+		std::uniform_int_distribution<
+			int
+		>;
+@end(globals)
+```
+* Define type for uniform distribution
 
 ```
 @add(globals)
 	template<typename RE>
 	std::string random_select(
 		const std::string &source,
-		int count,
-		RE &re
+		int count, RE &re
 	) {
 		std::string result;
 		@put(random select);
@@ -120,13 +128,11 @@
 	}
 @end(globals)
 ```
-
-```
-@add(includes)
-	#include <cassert>
-	#include <random>
-@end(includes)
-```
+* The function `@f(random_select)` chooses a number of random characters
+  from a given set
+* It does not return a permutation so it can choose the same character
+  multiple times in one go
+* It is a template function to allow any random engine to be passed
 
 ```
 @def(unit-tests)
@@ -136,6 +142,16 @@
 		>;
 @end(unit-tests)
 ```
+* For unit-testing `pwg` uses a simple random engine that will always
+  return `0`
+
+```
+@add(includes)
+	#include <cassert>
+@end(includes)
+```
+* The unit-tests use the `@f(assert)` macro from the `@s(<cassert>)`
+  header
 
 ```
 @add(unit-tests) {
@@ -146,81 +162,116 @@
 	);
 } @end(unit-tests)
 ```
-
-```
-@add(default state)
-	int seed = (std::random_device {})();
-@end(default state)
-```
-
-```
-@def(generate pw)
-	std::mt19937 re { seed };
-	pw += random_select(
-		upper, counts.upper, re
-	);
-@end(generate pw)
-```
+* With this degenerated random engine `@f(random_select)` will always
+  return the first character the expected number of times
 
 ```
 @def(random select)
 	int max = source.size() - 1;
-	std::uniform_int_distribution<int>
-		d { 0, max };
+	assert(max >= 0);
+	Uniform d { 0, max };
 	for (int i = 0; i < count; ++i) {
 		result += source[d(re)];
 	}
 @end(random select)
 ```
+* `@f(random_select)` expects that the character set is not empty
+* It builds a uniform distribution so it choses each character with the
+  same probability
 
 ```
-@def(other counts)
-	int lower = 3;
-	int digit = 2;
-	int special = 2;
-@end(other counts)
+@add(state)
+	int seed = (std::random_device {})();
+@end(state)
 ```
+* For the real random engine `pwg` generates a random seed
+* The user can overwrite this `seed` with a command line argument to
+  generate deterministic results
+* Also the invocation of `std::random_device` can be time consuming to
+  `pwg` uses a Mersenne Twister algorithm instead
 
 ```
-@add(default state)
-	std::string lower {
-		"abcdefghijklmnopqrstuvwxyz"
-	};
-	std::string digit {
-		"0123456789"
-	};
-	std::string special {
-		".,:;!?+-*/[](){}"
-	};
-@end(default state)
+@def(generate pw)
+	std::mt19937 re { seed };
+@end(generate pw)
 ```
+* `pwg` initialises the Mersenne Twister with the seed value
 
 ```
 @add(generate pw)
 	pw += random_select(
-		lower, counts.upper, re
-	);
-	pw += random_select(
-		digit, counts.digit, re
-	);
-	pw += random_select(
-		special, counts.special, re
+		upper_set, upper_count, re
 	);
 @end(generate pw)
 ```
+* `pwg` chooses the specified number of upper case letters
+
+```
+@add(state)
+	int lower_count = 3;
+	std::string lower_set {
+		"abcdefghijklmnopqrstuvwxyz"
+	};
+@end(state)
+```
+* For the lower letters `pwg` also specifies a default count and
+  character set
+
+```
+@add(generate pw)
+	pw += random_select(
+		lower_set, lower_count, re
+	);
+@end(generate pw)
+```
+* `pwg` chooses the specified number of upper case letters
+* But the lower case letters are following the upper case letters
+
+```
+@add(generate pw)
+	@put(add other chars);
+	@put(shuffle pw);
+@end(generate pw)
+```
+* `pwg` must shuffle the resulting string to generate a stronger
+  password
+* But other characters may be added before the shuffeling
 
 ```
 @add(globals)
 	template<typename RE>
 	std::string random_permute(
-		std::string str,
-		RE &re
+		std::string str, RE &re
 	) {
 		@put(random permute);
 		return str;
 	}
 @end(globals)
 ```
+* The function `@f(random_permute)` randomly shuffles all the characters
+  in a string
+* and return the shuffeled result
+* It receives a generic random engine to ease unit-tests
+
+```
+@def(shuffle pw)
+	pw = random_permute(pw, re);
+@end(shuffle pw)
+```
+
+```
+@def(random permute)
+	int i = str.size() - 1;
+	for (; i > 0; --i) {
+		Uniform d { 0, i };
+		std::swap(str[i], str[d(re)]);
+	}
+@end(random permute)
+```
+* `@f(random_permute)` exchanges the last character in the string with
+  a character at a random position in the string
+* Then it exchanges the second to last character with a character at a
+  random position up to and including this string
 
 ```
 @add(unit-tests) {
@@ -230,35 +281,57 @@
 	);
 } @end(unit-tests)
 ```
+* In this unit-test always the first position is used for swaps
+* So `@s(abc)` becomes `@s(cba)` in the first iteration of the loop
+* Then `@s(cba)` becomes `@s(bca)` and that is the final result
 
 ```
-@add(generate pw)
-	pw = random_permute(pw, re);
-@end(generate pw)
+@add(state)
+	int digit_count = 2;
+	std::string digit_set {
+		"0123456789"
+	};
+@end(state)
+```
+* Digits are also supported as part of a password
+
+```
+@def(add other chars)
+	pw += random_select(
+		digit_set, digit_count, re
+	);
+@end(add other chars)
+```
+* `pwg` chooses random digits and adds them to the password before
+  performing the permute
+
+```
+@add(state)
+	int special_count = 2;
+	std::string special_set {
+		".,:;!?+-*/[](){}"
+	};
+@end(state)
 ```
 
 ```
-@def(random permute)
-	for (
-		int i = str.size() - 1; i > 0; --i
-	) {
-		std::uniform_int_distribution<int>
-			d { 0, i };
-		std::swap(str[i], str[d(re)]);
-	}
-@end(random permute)
+@add(add other chars)
+	pw += random_select(
+		special_set, special_count, re
+	);
+@end(add other chars)
 ```
 
 ```
 @def(process args)
 	if (argc > 1) {
-		counts.upper = std::stoi(argv[1]);
+		upper_count = std::stoi(argv[1]);
 	}
 	if (argc > 2) {
-		counts.lower = std::stoi(argv[2]);
+		lower_count = std::stoi(argv[2]);
 	}
 	if (argc > 3) {
-		counts.digit = std::stoi(argv[3]);
+		digit_count = std::stoi(argv[3]);
 	}
 @end(process args)
 ```
@@ -266,10 +339,11 @@
 ```
 @add(process args)
 	if (argc > 4) {
-		counts.special = std::stoi(argv[4]);
+		special_count =
+			std::stoi(argv[4]);
 	}
 	if (argc > 5) {
-		special = argv[5];
+		special_set = argv[5];
 	}
 	if (argc > 6) {
 		seed = std::stoi(argv[6]);
