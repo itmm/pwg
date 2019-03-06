@@ -149,19 +149,22 @@
 
 ```
 @add(includes)
-	#include @s(<cassert>)
+	#include @s(<exception>)
 @end(includes)
 ```
-* The unit-tests use the `@f(assert)` macro from the `@s(<cassert>)`
-  header
+* The unit-tests use the standard exceptions
 
 ```
 @add(unit-tests) {
 	TestEngine te { 0 };
-	assert(
-		random_select("abc", 4, te) ==
+	if (
+		random_select("abc", 4, te) !=
 			"aaaa"
-	);
+	) {
+		throw std::logic_error(
+			"random select"
+		);
+	}
 } @end(unit-tests)
 ```
 * With this degenerated random engine `@f(random_select)` will always
@@ -170,7 +173,11 @@
 ```
 @def(random select)
 	int max = source.size() - 1;
-	assert(max >= 0);
+	if (max < 0) {
+		throw std::invalid_argument(
+			"no chars"
+		);
+	}
 	Uniform d { 0, max };
 	for (int i = 0; i < count; ++i) {
 		result += source[d(re)];
@@ -281,9 +288,13 @@
 ```
 @add(unit-tests) {
 	TestEngine te { 0 };
-	assert(
-		random_permute("abc", te) == "bca"
-	);
+	if (
+		random_permute("abc", te) != "bca"
+	) {
+		throw std::logic_error(
+			"random permute"
+		);
+	}
 } @end(unit-tests)
 ```
 * In this unit-test always the first position is used for swaps
@@ -331,9 +342,40 @@
   before performing the permutation
 
 ```
+@add(globals)
+	int to_int(
+		const std::string &s, int d
+	) {
+		try {
+			d = std::stoi(s);
+		}
+		catch (...) {
+			@put(to int err msg);
+		}
+		return d;
+	}
+@end(globals)
+```
+* `@f(to_int)` can cope with cases that the provided string cannot be
+  converted to an integer
+
+```
+@def(to int err msg)
+	std::cerr << "Can't convert `" <<
+		s << "` to integer; " <<
+		"will use " << d <<
+		" instead.\n";
+@end(to int err msg)
+```
+* `@f(to_int)` prints this error message, if the string cannot be
+  converted to an integer
+
+```
 @def(process args)
 	if (argc > 1) {
-		upper_count = std::stoi(argv[1]);
+		upper_count = to_int(
+			argv[1], upper_count
+		);
 	}
 @end(process args)
 ```
@@ -343,7 +385,9 @@
 ```
 @add(process args)
 	if (argc > 2) {
-		lower_count = std::stoi(argv[2]);
+		lower_count = to_int(
+			argv[2], lower_count
+		);
 	}
 @end(process args)
 ```
@@ -353,7 +397,9 @@
 ```
 @add(process args)
 	if (argc > 3) {
-		digit_count = std::stoi(argv[3]);
+		digit_count = to_int(
+			argv[3], digit_count
+		);
 	}
 @end(process args)
 ```
@@ -363,8 +409,9 @@
 ```
 @add(process args)
 	if (argc > 4) {
-		special_count =
-			std::stoi(argv[4]);
+		special_count = to_int(
+			argv[4], special_count
+		);
 	}
 @end(process args)
 ```
@@ -374,7 +421,15 @@
 ```
 @add(process args)
 	if (argc > 5) {
-		special_set = argv[5];
+		std::string s { argv[5] };
+		if (s.size()) {
+			special_set = argv[5];
+		} else {
+			std::cerr << "Specials are "
+				"empty; will use `" <<
+				special_set <<
+				"` instead.\n";
+		}
 	}
 @end(process args)
 ```
@@ -384,7 +439,7 @@
 ```
 @add(process args)
 	if (argc > 6) {
-		seed = std::stoi(argv[6]);
+		seed = to_int(argv[6], seed);
 	}
 @end(process args)
 ```
