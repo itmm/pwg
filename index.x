@@ -247,59 +247,19 @@
 * But other characters may be added before the shuffeling
 
 ```
-@add(globals)
-	template<typename @t(RE)>
-	std::string random_permute(
-		std::string str, @t(RE) &re
-	) {
-		@put(random permute);
-		return str;
-	}
-@end(globals)
+@add(includes)
+	#include <algorithm>
+@end(includes)
 ```
-* The function `@f(random_permute)` randomly shuffles all the characters
-  in a string
-* and return the shuffeled result
-* It receives a generic random engine to ease unit-tests
+* Defines shuffle function
 
 ```
 @def(shuffle pw)
-	pw = random_permute(pw, re);
+	std::random_shuffle(pw.begin(), pw.end());
 @end(shuffle pw)
 ```
-* The `@f(main)` function uses `@f(random_permute)` to perturbate the
+* The `@f(main)` function uses `@f(random_shuffle)` to perturbate the
   letters from the different categories
-
-```
-@def(random permute)
-	int i = str.size() - 1;
-	for (; i > 0; --i) {
-		Uniform d { 0, i };
-		std::swap(str[i], str[d(re)]);
-	}
-@end(random permute)
-```
-* `@f(random_permute)` exchanges the last character in the string with
-  a character at a random position in the string
-* Then it exchanges the second to last character with a character at a
-  random position up to and including this string
-* This continues until there is only one character left
-
-```
-@add(unit-tests) {
-	TestEngine te { 0 };
-	if (
-		random_permute("abc", te) != "bca"
-	) {
-		throw std::logic_error(
-			"random permute"
-		);
-	}
-} @end(unit-tests)
-```
-* In this unit-test always the first position is used for swaps
-* So `@s(abc)` becomes `@s(cba)` in the first iteration of the loop
-* Then `@s(cba)` becomes `@s(bca)` and that is the final result
 
 ```
 @add(state)
