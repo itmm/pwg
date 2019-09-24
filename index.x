@@ -255,7 +255,9 @@
 
 ```
 @def(shuffle pw)
-	std::random_shuffle(pw.begin(), pw.end());
+	std::random_shuffle(
+		pw.begin(), pw.end()
+	);
 @end(shuffle pw)
 ```
 * The `@f(main)` function uses `@f(random_shuffle)` to perturbate the
