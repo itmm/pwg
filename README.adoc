@@ -5,7 +5,7 @@ This project demonstrates how to write a small application with `hex`.
 
 The generated documentation can be found at
 
-* https://github.com/itmm/pwg
+* https://itmm.github.io/pwg/
 
 More information to `hex` can be found at 
 
