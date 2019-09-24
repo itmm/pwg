@@ -1,8 +1,8 @@
 # pwg – a password generator
 * Generates random passwords
-* Number of upper case, lower case,
-  digits, and special chars can be
+* Number of upper case, lower case, digits, and special chars can be
   passed as arguments
+* The repository for this project is at `https://github.com/itmm/pwg`
 
 ```
 @Def(| c++ -x c++ -o pwg -)

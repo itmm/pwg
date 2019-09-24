@@ -1,0 +1,14 @@
+Simple Password Generator
+=========================
+
+This project demonstrates how to write a small application with `hex`.
+
+The generated documentation can be found at
+
+* https://github.com/itmm/pwg
+
+More information to `hex` can be found at 
+
+* https://github.com/itmm/hex and
+* https://github.com/itmm/hex
+
