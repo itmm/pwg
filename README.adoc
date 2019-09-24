@@ -9,6 +9,6 @@ The generated documentation can be found at
 
 More information to `hex` can be found at 
 
-* https://github.com/itmm/hex and
-* https://github.com/itmm/hex
+* https://github.com/itmm/hex/ and
+* https://itmm.github.io/hex/
 
