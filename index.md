@@ -12,7 +12,7 @@
 * The generated code will be piped directly into the C++ compiler
 * The `-x c++` informs the compiler that the input is C++
 * The compiler will generate the object file `pwg`
-* The program consits of different parts
+* The program consist of different parts
 * Invoking `hx` without arguments will build the executable and the
   HTML documentation
 
@@ -47,7 +47,7 @@
 	{ @put(unit-tests); }
 @end(main)
 ```
-* Before runningt the main algorithm the `@f(main)` function runs all
+* Before running the main algorithm the `@f(main)` function runs all
   unit-tests
 * It is scoped into a local block so all elements that are needed in a
   unit-test are destroyed before the main algorithm starts
@@ -185,7 +185,7 @@
 @end(random select)
 ```
 * `@f(random_select)` expects that the character set is not empty
-* It builds a uniform distribution so it choses each character with the
+* It builds a uniform distribution so it chooses each character with the
   same probability
 
 ```
