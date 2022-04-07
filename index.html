@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="de">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <title>pwg – a password generator</title>
@@ -7,10 +7,10 @@
 <body>
 <h1>pwg – a password generator</h1>
 <div class="slides">
-<div>
-<div>
+<div class="page">
+<div class="slide slide-header"><div class="slide-nr">1</div><div class="headers">
 <h1>pwg – a password generator</h1>
-</div>
+</div></div>
 <ul><li>
 Generates random passwords
 </li><li>
@@ -19,7 +19,7 @@ Number of upper case, lower case, digits, and special chars can be  passed as ar
 The repository for this project is at <code><span class="var">https</span>://<span class="var">github</span>.<span class="var">com</span>/<span class="var">itmm</span>/<span class="var">pwg</span></code>
 </li></ul>
 </div>
-<div><div>
+<div class="page"><div class="slide"><div class="slide-nr">2</div>
 <code>
 <span class="macro">@Def(<span class="name">| c++ -x c++ -o pwg -</span>)</span><br/>
 <span class="in1"></span><span class="macro">@put(<span class="name">parts</span>)</span><br/>
@@ -37,7 +37,7 @@ The program consist of different parts
 Invoking <code><span class="var">hx</span></code> without arguments will build the executable and the  HTML documentation
 </li></ul>
 </div>
-<div><div>
+<div class="page"><div class="slide"><div class="slide-nr">3</div>
 <code>
 <span class="macro">@def(<span class="name">parts</span>)</span><br/>
 <span class="in1"></span><span class="macro">@put(<span class="name">includes</span>)</span><br/>
@@ -49,7 +49,7 @@ First the included files are specified
 so the rest of the program can use hem
 </li></ul>
 </div>
-<div><div>
+<div class="page"><div class="slide"><div class="slide-nr">4</div>
 <code>
 <span class="macro">@add(<span class="name">parts</span>)</span><br/>
 <span class="in1"></span><span class="macro">@put(<span class="name">globals</span>)</span><br/>
@@ -61,7 +61,7 @@ Then global elements are defined
 so the main function can use them
 </li></ul>
 </div>
-<div><div>
+<div class="page"><div class="slide"><div class="slide-nr">5</div>
 <code>
 <span class="macro">@add(<span class="name">parts</span>)</span><br/>
 <span class="in1"></span><span class="type">int</span> <span class="fn">main</span>(<span class="type">int</span> <span class="var">argc</span>, <span class="type">char</span> *<span class="var">argv</span>[]) {<br/>
@@ -75,7 +75,7 @@ At last the main function is defined
 This is the central entry point of the program
 </li></ul>
 </div>
-<div><div>
+<div class="page"><div class="slide"><div class="slide-nr">6</div>
 <code>
 <span class="macro">@def(<span class="name">main</span>)</span><br/>
 <span class="in1"></span>{ <span class="macro">@put(<span class="name">unit-tests</span>)</span>; }<br/>
@@ -87,7 +87,7 @@ Before running the main algorithm the <code><span class="fn">main</span></code> 
 It is scoped into a local block so all elements that are needed in a  unit-test are destroyed before the main algorithm starts
 </li></ul>
 </div>
-<div><div>
+<div class="page"><div class="slide"><div class="slide-nr">7</div>
 <code>
 <span class="macro">@add(<span class="name">main</span>)</span><br/>
 <span class="in1"></span><span class="macro">@put(<span class="name">state</span>)</span>;<br/>
@@ -102,7 +102,7 @@ The state will keep track of how many characters of each group that  the algorit
 The state can be changed with command line arguments that the  <code><span class="fn">main</span></code> function processes next
 </li></ul>
 </div>
-<div><div>
+<div class="page"><div class="slide"><div class="slide-nr">8</div>
 <code>
 <span class="macro">@def(<span class="name">includes</span>)</span><br/>
 <span class="in1"></span><span class="keyword">#include</span> <span class="str">&lt;string&gt;</span><br/>
@@ -115,7 +115,7 @@ The algorithm needs the <code><span class="str">&lt;string&gt;</span></code> hea
 and <code><span class="str">&lt;iostream&gt;</span></code> to write them
 </li></ul>
 </div>
-<div><div>
+<div class="page"><div class="slide"><div class="slide-nr">9</div>
 <code>
 <span class="macro">@add(<span class="name">main</span>)</span><br/>
 <span class="in1"></span><span class="type">std</span>::<span class="type">string</span> <span class="var">pw</span>;<br/>
@@ -129,7 +129,7 @@ The algorithm stores the generated password in <code><span class="var">pw</span>
 After the generation it writes the password to standard output
 </li></ul>
 </div>
-<div><div>
+<div class="page"><div class="slide"><div class="slide-nr">10</div>
 <code>
 <span class="macro">@def(<span class="name">state</span>)</span><br/>
 <span class="in1"></span><span class="type">int</span> <span class="var">upper_count</span> = <span class="num">3</span>;<br/>
@@ -146,7 +146,7 @@ For each group there is one variable that holds the number of  characters that a
 and a <code><span class="type">std</span>::<span class="type">string</span></code> with all characters in this group
 </li></ul>
 </div>
-<div><div>
+<div class="page"><div class="slide"><div class="slide-nr">11</div>
 <code>
 <span class="macro">@add(<span class="name">includes</span>)</span><br/>
 <span class="in1"></span><span class="keyword">#include</span> <span class="str">&lt;random&gt;</span><br/>
@@ -156,7 +156,7 @@ and a <code><span class="type">std</span>::<span class="type">string</span></cod
 The <code><span class="str">&lt;random&gt;</span></code> header from C++ is used to generate random numbers
 </li></ul>
 </div>
-<div><div>
+<div class="page"><div class="slide"><div class="slide-nr">12</div>
 <code>
 <span class="macro">@def(<span class="name">globals</span>)</span><br/>
 <span class="in1"></span><span class="keyword">using</span> <span class="type">Uniform</span> =<br/>
@@ -173,7 +173,7 @@ This shortens the code parts that use random distributions
 It must be declared before the functions are declared that use it
 </li></ul>
 </div>
-<div><div>
+<div class="page"><div class="slide"><div class="slide-nr">13</div>
 <code>
 <span class="macro">@add(<span class="name">globals</span>)</span><br/>
 <span class="in1"></span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> <span class="type">RE</span>&gt;<br/>
@@ -195,7 +195,7 @@ It does not return a permutation so it can choose the same character  multiple t
 It is a template function to allow any random engine to be passed
 </li></ul>
 </div>
-<div><div>
+<div class="page"><div class="slide"><div class="slide-nr">14</div>
 <code>
 <span class="macro">@def(<span class="name">unit-tests</span>)</span><br/>
 <span class="in1"></span><span class="keyword">using</span> <span class="type">TestEngine</span> =<br/>
@@ -208,7 +208,7 @@ It is a template function to allow any random engine to be passed
 For unit-testing <code><span class="var">pwg</span></code> uses a simple random engine that will always  return <code><span class="num">0</span></code>
 </li></ul>
 </div>
-<div><div>
+<div class="page"><div class="slide"><div class="slide-nr">15</div>
 <code>
 <span class="macro">@add(<span class="name">includes</span>)</span><br/>
 <span class="in1"></span><span class="keyword">#include</span> <span class="str">&lt;exception&gt;</span><br/>
@@ -218,7 +218,7 @@ For unit-testing <code><span class="var">pwg</span></code> uses a simple random 
 The unit-tests use the standard exceptions
 </li></ul>
 </div>
-<div><div>
+<div class="page"><div class="slide"><div class="slide-nr">16</div>
 <code>
 <span class="macro">@add(<span class="name">unit-tests</span>)</span> {<br/>
 <span class="in1"></span><span class="type">TestEngine</span> <span class="var">te</span> { <span class="num">0</span> };<br/>
@@ -236,7 +236,7 @@ The unit-tests use the standard exceptions
 With this degenerated random engine <code><span class="fn">random_select</span></code> will always  return the first character the expected number of times
 </li></ul>
 </div>
-<div><div>
+<div class="page"><div class="slide"><div class="slide-nr">17</div>
 <code>
 <span class="macro">@def(<span class="name">random select</span>)</span><br/>
 <span class="in1"></span><span class="type">int</span> <span class="var">max</span> = <span class="var">source</span>.<span class="fn">size</span>() - <span class="num">1</span>;<br/>
@@ -257,10 +257,10 @@ With this degenerated random engine <code><span class="fn">random_select</span><
 It builds a uniform distribution so it chooses each character with the  same probability
 </li></ul>
 </div>
-<div><div>
+<div class="page"><div class="slide"><div class="slide-nr">18</div>
 <code>
 <span class="macro">@add(<span class="name">state</span>)</span><br/>
-<span class="in1"></span><span class="type">int</span> <span class="var">seed</span> = (<span class="type">std</span>::<span class="type">random_device</span> {})();<br/>
+<span class="in1"></span><span class="type">auto</span> <span class="var">seed</span> { (<span class="type">std</span>::<span class="type">random_device</span> {})() };<br/>
 <span class="macro">@end(<span class="name">state</span>)</span><br/>
 </code></div>
 <ul><li>
@@ -271,7 +271,7 @@ The user can overwrite this <code><span class="var">seed</span></code> with a co
 Also the invocation of <code><span class="type">std</span>::<span class="type">random_device</span></code> can be time consuming to  <code><span class="var">pwg</span></code> uses a Mersenne Twister algorithm instead
 </li></ul>
 </div>
-<div><div>
+<div class="page"><div class="slide"><div class="slide-nr">19</div>
 <code>
 <span class="macro">@def(<span class="name">generate pw</span>)</span><br/>
 <span class="in1"></span><span class="type">std</span>::<span class="type">mt19937</span> <span class="var">re</span> { <span class="var">seed</span> };<br/>
@@ -281,7 +281,7 @@ Also the invocation of <code><span class="type">std</span>::<span class="type">r
 <code><span class="var">pwg</span></code> initialises the Mersenne Twister with the seed value
 </li></ul>
 </div>
-<div><div>
+<div class="page"><div class="slide"><div class="slide-nr">20</div>
 <code>
 <span class="macro">@add(<span class="name">generate pw</span>)</span><br/>
 <span class="in1"></span><span class="var">pw</span> += <span class="fn">random_select</span>(<br/>
@@ -293,7 +293,7 @@ Also the invocation of <code><span class="type">std</span>::<span class="type">r
 <code><span class="var">pwg</span></code> chooses the specified number of upper case letters
 </li></ul>
 </div>
-<div><div>
+<div class="page"><div class="slide"><div class="slide-nr">21</div>
 <code>
 <span class="macro">@add(<span class="name">state</span>)</span><br/>
 <span class="in1"></span><span class="type">int</span> <span class="var">lower_count</span> = <span class="num">3</span>;<br/>
@@ -306,7 +306,7 @@ Also the invocation of <code><span class="type">std</span>::<span class="type">r
 For the lower letters <code><span class="var">pwg</span></code> also specifies a default count and  character set
 </li></ul>
 </div>
-<div><div>
+<div class="page"><div class="slide"><div class="slide-nr">22</div>
 <code>
 <span class="macro">@add(<span class="name">generate pw</span>)</span><br/>
 <span class="in1"></span><span class="var">pw</span> += <span class="fn">random_select</span>(<br/>
@@ -320,7 +320,7 @@ For the lower letters <code><span class="var">pwg</span></code> also specifies a
 But the lower case letters are following the upper case letters
 </li></ul>
 </div>
-<div><div>
+<div class="page"><div class="slide"><div class="slide-nr">23</div>
 <code>
 <span class="macro">@add(<span class="name">generate pw</span>)</span><br/>
 <span class="in1"></span><span class="macro">@put(<span class="name">add other chars</span>)</span>;<br/>
@@ -333,7 +333,7 @@ But the lower case letters are following the upper case letters
 But other characters may be added before the shuffeling
 </li></ul>
 </div>
-<div><div>
+<div class="page"><div class="slide"><div class="slide-nr">24</div>
 <code>
 <span class="macro">@add(<span class="name">includes</span>)</span><br/>
 <span class="in1"></span><span class="keyword">#include</span> &lt;<span class="var">algorithm</span>&gt;<br/>
@@ -343,7 +343,7 @@ But other characters may be added before the shuffeling
 Defines shuffle function
 </li></ul>
 </div>
-<div><div>
+<div class="page"><div class="slide"><div class="slide-nr">25</div>
 <code>
 <span class="macro">@def(<span class="name">shuffle pw</span>)</span><br/>
 <span class="in1"></span><span class="type">std</span>::<span class="fn">random_shuffle</span>(<br/>
@@ -355,7 +355,7 @@ Defines shuffle function
 The <code><span class="fn">main</span></code> function uses <code><span class="fn">random_shuffle</span></code> to perturbate the  letters from the different categories
 </li></ul>
 </div>
-<div><div>
+<div class="page"><div class="slide"><div class="slide-nr">26</div>
 <code>
 <span class="macro">@add(<span class="name">state</span>)</span><br/>
 <span class="in1"></span><span class="type">int</span> <span class="var">digit_count</span> = <span class="num">2</span>;<br/>
@@ -368,7 +368,7 @@ The <code><span class="fn">main</span></code> function uses <code><span class="f
 Digits are also supported as part of a password
 </li></ul>
 </div>
-<div><div>
+<div class="page"><div class="slide"><div class="slide-nr">27</div>
 <code>
 <span class="macro">@def(<span class="name">add other chars</span>)</span><br/>
 <span class="in1"></span><span class="var">pw</span> += <span class="fn">random_select</span>(<br/>
@@ -380,7 +380,7 @@ Digits are also supported as part of a password
 <code><span class="var">pwg</span></code> chooses random digits and adds them to the password before  performing the permutation
 </li></ul>
 </div>
-<div><div>
+<div class="page"><div class="slide"><div class="slide-nr">28</div>
 <code>
 <span class="macro">@add(<span class="name">state</span>)</span><br/>
 <span class="in1"></span><span class="type">int</span> <span class="var">special_count</span> = <span class="num">2</span>;<br/>
@@ -393,7 +393,7 @@ Digits are also supported as part of a password
 Special characters are also supported as part of a password
 </li></ul>
 </div>
-<div><div>
+<div class="page"><div class="slide"><div class="slide-nr">29</div>
 <code>
 <span class="macro">@add(<span class="name">add other chars</span>)</span><br/>
 <span class="in1"></span><span class="var">pw</span> += <span class="fn">random_select</span>(<br/>
@@ -405,7 +405,7 @@ Special characters are also supported as part of a password
 <code><span class="var">pwg</span></code> chooses random special characters and adds them to the password  before performing the permutation
 </li></ul>
 </div>
-<div><div>
+<div class="page"><div class="slide"><div class="slide-nr">30</div>
 <code>
 <span class="macro">@add(<span class="name">globals</span>)</span><br/>
 <span class="in1"></span><span class="type">int</span> <span class="fn">to_int</span>(<br/>
@@ -425,7 +425,7 @@ Special characters are also supported as part of a password
 <code><span class="fn">to_int</span></code> can cope with cases that the provided string cannot be  converted to an integer
 </li></ul>
 </div>
-<div><div>
+<div class="page"><div class="slide"><div class="slide-nr">31</div>
 <code>
 <span class="macro">@def(<span class="name">to int err msg</span>)</span><br/>
 <span class="in1"></span><span class="type">std</span>::<span class="var">cerr</span> &lt;&lt; <span class="str">"Can't convert `"</span> &lt;&lt;<br/>
@@ -438,7 +438,7 @@ Special characters are also supported as part of a password
 <code><span class="fn">to_int</span></code> prints this error message, if the string cannot be  converted to an integer
 </li></ul>
 </div>
-<div><div>
+<div class="page"><div class="slide"><div class="slide-nr">32</div>
 <code>
 <span class="macro">@def(<span class="name">process args</span>)</span><br/>
 <span class="in1"></span><span class="keyword">if</span> (<span class="var">argc</span> &gt; <span class="num">1</span>) {<br/>
@@ -452,7 +452,7 @@ Special characters are also supported as part of a password
 The first command line argument is the number of upper-case letters  in the generated password
 </li></ul>
 </div>
-<div><div>
+<div class="page"><div class="slide"><div class="slide-nr">33</div>
 <code>
 <span class="macro">@add(<span class="name">process args</span>)</span><br/>
 <span class="in1"></span><span class="keyword">if</span> (<span class="var">argc</span> &gt; <span class="num">2</span>) {<br/>
@@ -466,7 +466,7 @@ The first command line argument is the number of upper-case letters  in the gene
 The second command line argument is the number of lower-case letters  in the generated password
 </li></ul>
 </div>
-<div><div>
+<div class="page"><div class="slide"><div class="slide-nr">34</div>
 <code>
 <span class="macro">@add(<span class="name">process args</span>)</span><br/>
 <span class="in1"></span><span class="keyword">if</span> (<span class="var">argc</span> &gt; <span class="num">3</span>) {<br/>
@@ -480,7 +480,7 @@ The second command line argument is the number of lower-case letters  in the gen
 The third command line argument is the number of digits in the  generated password
 </li></ul>
 </div>
-<div><div>
+<div class="page"><div class="slide"><div class="slide-nr">35</div>
 <code>
 <span class="macro">@add(<span class="name">process args</span>)</span><br/>
 <span class="in1"></span><span class="keyword">if</span> (<span class="var">argc</span> &gt; <span class="num">4</span>) {<br/>
@@ -494,7 +494,7 @@ The third command line argument is the number of digits in the  generated passwo
 The fourth command line argument is the number of special characters  in the generated password
 </li></ul>
 </div>
-<div><div>
+<div class="page"><div class="slide"><div class="slide-nr">36</div>
 <code>
 <span class="macro">@add(<span class="name">process args</span>)</span><br/>
 <span class="in1"></span><span class="keyword">if</span> (<span class="var">argc</span> &gt; <span class="num">5</span>) {<br/>
@@ -514,7 +514,7 @@ The fourth command line argument is the number of special characters  in the gen
 The fifth command line argument is the set of special characters used  in the generated password
 </li></ul>
 </div>
-<div><div>
+<div class="page"><div class="slide"><div class="slide-nr">37</div>
 <code>
 <span class="macro">@add(<span class="name">process args</span>)</span><br/>
 <span class="in1"></span><span class="keyword">if</span> (<span class="var">argc</span> &gt; <span class="num">6</span>) {<br/>

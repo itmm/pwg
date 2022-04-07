@@ -190,7 +190,7 @@
 
 ```
 @add(state)
-	int seed = (std::@t(random_device) {})();
+	auto seed { (std::@t(random_device) {})() };
 @end(state)
 ```
 * For the real random engine `pwg` generates a random seed
