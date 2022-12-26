@@ -21,9 +21,9 @@ The repository for this project is at <code><span class="var">https</span>://<sp
 </div>
 <div class="page"><div class="slide"><div class="slide-nr">2</div>
 <code>
-<span class="macro">@Def(<span class="name">| c++ -x c++ -o pwg -</span>)</span><br/>
+<span class="macro">@Def(<span class="name">| c++ -x c++ -std=c++17 -o pwg -</span>)</span><br/>
 <span class="in1"></span><span class="macro">@put(<span class="name">parts</span>)</span><br/>
-<span class="macro">@end(<span class="name">| c++ -x c++ -o pwg -</span>)</span><br/>
+<span class="macro">@end(<span class="name">| c++ -x c++ -std=c++17 -o pwg -</span>)</span><br/>
 </code></div>
 <ul><li>
 The generated code will be piped directly into the C++ compiler
@@ -346,8 +346,8 @@ Defines shuffle function
 <div class="page"><div class="slide"><div class="slide-nr">25</div>
 <code>
 <span class="macro">@def(<span class="name">shuffle pw</span>)</span><br/>
-<span class="in1"></span><span class="type">std</span>::<span class="fn">random_shuffle</span>(<br/>
-<span class="in2"></span><span class="var">pw</span>.<span class="fn">begin</span>(), <span class="var">pw</span>.<span class="fn">end</span>()<br/>
+<span class="in1"></span><span class="type">std</span>::<span class="fn">shuffle</span>(<br/>
+<span class="in2"></span><span class="var">pw</span>.<span class="fn">begin</span>(), <span class="var">pw</span>.<span class="fn">end</span>(), <span class="var">re</span><br/>
 <span class="in1"></span>);<br/>
 <span class="macro">@end(<span class="name">shuffle pw</span>)</span><br/>
 </code></div>

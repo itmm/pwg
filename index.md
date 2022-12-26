@@ -5,9 +5,9 @@
 * The repository for this project is at `https://github.com/itmm/pwg`
 
 ```
-@Def(| c++ -x c++ -o pwg -)
+@Def(| c++ -x c++ -std=c++17 -o pwg -)
 	@put(parts)
-@end(| c++ -x c++ -o pwg -)
+@end(| c++ -x c++ -std=c++17 -o pwg -)
 ```
 * The generated code will be piped directly into the C++ compiler
 * The `-x c++` informs the compiler that the input is C++
@@ -255,8 +255,8 @@
 
 ```
 @def(shuffle pw)
-	std::random_shuffle(
-		pw.begin(), pw.end()
+	std::shuffle(
+		pw.begin(), pw.end(), re
 	);
 @end(shuffle pw)
 ```
