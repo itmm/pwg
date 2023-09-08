@@ -225,8 +225,8 @@ int main(int argc, char *argv[]) {
 
 ```c++
 // ...
-	// generate pw 3
-	std::random_shuffle(pw.begin(), pw.end());
+	// generate pw 4
+	std::shuffle(pw.begin(), pw.end(), re);
 // ...
 ```
 * The `main` function uses `random_shuffle` to perturbate the

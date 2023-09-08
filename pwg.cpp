@@ -144,13 +144,13 @@ int main(int argc, char *argv[]) {
 	);
 #line 247
 	pw += random_select(digit_set, digit_count, re);
-#line 229
-	std::random_shuffle(pw.begin(), pw.end());
 #line 206
 	pw += random_select(
 		lower_set, lower_count, re
 	);
 	// generate pw 4
+#line 229
+	std::shuffle(pw.begin(), pw.end(), re);
 #line 62
 	std::cout << pw << '\n';
 #line 18
