@@ -76,15 +76,15 @@ int main(int argc, char *argv[]) {
 	std::string special_set { ".,:;!?+-*/[](){}" };
 #line 238
 	int digit_count = 2;
-	std::string digit_set { "0123456789" };
+	std::string digit_set { "23456789" };
 #line 196
 	int lower_count = 3;
-	std::string lower_set { "abcdefghijklmnopqrstuvwxyz" };
+	std::string lower_set { "abcdefghijkmnopqrstuvwxyz" };
 #line 166
 	auto seed { (std::random_device {})() };
 #line 71
 	int upper_count = 3;
-	std::string upper_set { "ABCDEFGHIJKLMNOPQRSTUVWXYZ" };
+	std::string upper_set { "ABCDEFGHJKLMNPQRSTUVWXYZ" };
 #line 35
 	// process args
 #line 376

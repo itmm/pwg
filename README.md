@@ -69,7 +69,7 @@ int main(int argc, char *argv[]) {
 // ...
 	// state
 	int upper_count = 3;
-	std::string upper_set { "ABCDEFGHIJKLMNOPQRSTUVWXYZ" };
+	std::string upper_set { "ABCDEFGHJKLMNPQRSTUVWXYZ" };
 // ...
 ```
 * `pwg` generates a password from different character groups
@@ -194,7 +194,7 @@ int main(int argc, char *argv[]) {
 // ...
 	// state
 	int lower_count = 3;
-	std::string lower_set { "abcdefghijklmnopqrstuvwxyz" };
+	std::string lower_set { "abcdefghijkmnopqrstuvwxyz" };
 // ...
 ```
 * For the lower letters `pwg` also specifies a default count and
@@ -236,7 +236,7 @@ int main(int argc, char *argv[]) {
 // ...
 	// state
 	int digit_count = 2;
-	std::string digit_set { "0123456789" };
+	std::string digit_set { "23456789" };
 // ...
 ```
 * Digits are also supported as part of a password
